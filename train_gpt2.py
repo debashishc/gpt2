@@ -7,11 +7,15 @@ import math
 
 @dataclass
 class GPTConfig:
-    block_size: int = 256  # max_len for input seq
-    vocab_size: int = 65  # model vocab
-    n_layer: int = 6  # model transformer blocks
-    n_head: int = 6  # attention heads in each transformer block
-    n_embed = 384  # model embedding size: token embed_size + positional embed_size
+    block_size: int = 1024  # max_len for input seq
+    vocab_size: int = (
+        50304  # model vocab, vocab size of 50257 padded up to the nearest of 64 for efficiency
+    )
+    n_layer: int = 12  # model transformer blocks
+    n_head: int = 12  # attention heads in each transformer block
+    n_embed: int = 768  # model embedding size: token embed_size + positional embed_size
+    dropout: float = 0.0  #
+    bias: bool = True
 
 
 class Block(nn.Module):
